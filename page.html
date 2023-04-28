@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js page</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1 align="center">Fashion</h1>
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            <div class="col-2">
+                <button onclick="viewAllRecord()" class="btn btn-primary">All</button>
+            </div>
+            <div class="col-2">
+                <button onclick="ManWearData()" class="btn btn-primary">Man Wear</button>
+            </div>
+            <div class="col-2">
+                <button onclick="WomenWearData()" class="btn btn-primary">Women Wear</button>
+            </div>
+            <div class="col-2">
+                <button onclick="ChildrenWearData()" class="btn btn-primary">Children Wear</button>
+            </div>
+            <div class="col-2">
+                <button onclick="FootwearHandbagsData()" class="btn btn-primary">Footwear+Handbags</button>
+            </div>
+            <div class="col-2">
+                <button onclick="WatchesData()" class="btn btn-primary">Watches</button>
+            </div>
+        </div>
+    
+        <div class="row" id="allrecord">
+            
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        let data = [
+                {
+                    name : "Suit",
+                    price : 10000,
+                    image : "https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit"
+                },
+                {
+                    name : "saree",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit"
+                },
+                {
+                    name : "Children-wear",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/3771605/pexels-photo-3771605.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit"
+                },
+                {
+                    name : "Simple bag",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/9595291/pexels-photo-9595291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags"
+                },
+                {
+                    name : "Man watch",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches"
+                },
+                {
+                    name : "Dresses",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/1148957/pexels-photo-1148957.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Formal-Shirt",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/16313961/pexels-photo-16313961.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "treditional wear(man)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "Jeans",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "Shorts",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "T-shirt & polos",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "Trousers(man)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "Jumpsuit",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Jeans(Women)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Kurta Sets",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Jodhpuri Pants",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Tunics",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Trousers(Women)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Shrug",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "Night suits",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Women Outfit",
+                },
+                {
+                    name : "T-Shirts(child)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Ethnic Wear(child)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Bodysuit(child)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Rompers(child)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Flip Flops",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Sleepsuit(child)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Sandals",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Shoes",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Sling bags",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Backpacks",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Man's footwear",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Women's footwear",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "kids footwear",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Sports footwear",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Casual(man)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Casual (Women)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Footwear+Handbags",
+                },
+                {
+                    name : "Women watch",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+                
+                {
+                    name : "Rolex",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+                {
+                    name : "Patek Philippe",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+                {
+                    name : "Gucci",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+                
+                {
+                    name : "Glam party fits(child)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Jackets",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "Shorts",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "Bow & tie",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Man Outfit",
+                },
+                {
+                    name : "Romper",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Bloomers(child)",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Children Outfit",
+                },
+                {
+                    name : "Omega",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+                {
+                    name : "Rado",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+                {
+                    name : "Cartier",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+                {
+                    name : "Chopard",
+                    price : 7000,
+                    image : "https://images.pexels.com/photos/2431224/pexels-photo-2431224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    category : "Watches",
+                },
+
+            ];
+
+
+            viewAllRecord();
+            
+    function viewAllRecord()
+    {
+        let tbl = "";
+        data.map((val)=>{
+            tbl += `
+                <div class="col-md-4 pb-4">
+                    <div class="card">
+                        <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">${val.name}</h5>
+                        <p class="card-text">${val.category}</p>
+                        <a href="#" class="btn btn-primary">Order</a>
+                        </div>
+                    </div>
+                </div>
+            `
+        })
+
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+    function ManWearData(){
+        let category = "Man Outfit";
+        let tbl = "";
+        data.map((val)=>{
+
+            if(val.category == category)
+            {
+                tbl += `
+                    <div class="col-md-4 pb-4">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.category}</p>
+                            <a href="#" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+
+    function WomenWearData(){
+        let category = "Women Outfit";
+        let tbl = "";
+        data.map((val)=>{
+
+            if(val.category == category)
+            {
+                tbl += `
+                    <div class="col-md-4 pb-4">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.category}</p>
+                            <a href="#" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+            
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+    function ChildrenWearData(){
+        let category = "Children Outfit";
+        let tbl = "";
+        data.map((val)=>{
+
+            if(val.category == category)
+            {
+                tbl += `
+                    <div class="col-md-4 pb-4">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.category}</p>
+                            <a href="#" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+            
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+
+    function FootwearHandbagsData(){
+        let category = "Footwear+Handbags";
+        let tbl = "";
+        data.map((val)=>{
+
+            if(val.category == category)
+            {
+                tbl += `
+                    <div class="col-md-4 pb-4">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.category}</p>
+                            <a href="#" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+            
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+    function WatchesData(){
+        let category = "Watches";
+        let tbl = "";
+        data.map((val)=>{
+
+            if(val.category == category)
+            {
+                tbl += `
+                    <div class="col-md-4 pb-4">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.category}</p>
+                            <a href="#" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+            
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+
+
+
+    </script>
+
+</body>
+</html>
